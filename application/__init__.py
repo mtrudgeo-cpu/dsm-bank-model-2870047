@@ -30,10 +30,10 @@ numeric_df['balance'] = balance_std_scale.fit_transform(numeric_df[['balance']])
 X_categoric = df.iloc[:, [1,2,3,4,6,7]].values
 
 #onehotencoding
-ohe = OneHotEncoder()
+ohe = OneHotEncoder(handle_unknown='ignore')
 categoric_data = ohe.fit_transform(X_categoric).toarray()
 categoric_df = pd.DataFrame(categoric_data)
-categoric_df.columns = ohe.get_feature_names()
+categoric_df.columns = ohe.get_feature_names_out()
 
 #combine numeric and categorix
 X_final = pd.concat([numeric_df, categoric_df], axis = 1)
